@@ -1,0 +1,20 @@
+Length of S: 3000. Time elapsed for quicksort: 0.011352 seconds.
+Length of S: 3000. Time elapsed for insertionsort: 0.291212 seconds.
+Length of S: 3000. Time elapsed for mergesort: 0.0121352 seconds.
+
+Length of S: 6000. Time elapsed for quicksort: 0.0240803 seconds.
+Length of S: 6000. Time elapsed for insertionsort: 1.17047 seconds.
+Length of S: 6000. Time elapsed for mergesort: 0.0264076 seconds.
+
+Length of S: 9000. Time elapsed for quicksort: 0.0375205 seconds.
+Length of S: 9000. Time elapsed for insertionsort: 2.73499 seconds.
+Length of S: 9000. Time elapsed for mergesort: 0.0420303 seconds.
+
+Length of S: 12000. Time elapsed for quicksort: 0.0529927 seconds.
+Length of S: 12000. Time elapsed for insertionsort: 4.79323 seconds.
+Length of S: 12000. Time elapsed for mergesort: 0.0584182 seconds.
+
+Length of S: 15000. Time elapsed for quicksort: 0.0670626 seconds.
+Length of S: 15000. Time elapsed for insertionsort: 7.43607 seconds.
+Length of S: 15000. Time elapsed for mergesort: 0.0754867 seconds.
+

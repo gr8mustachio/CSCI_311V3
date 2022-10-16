@@ -1,0 +1,33 @@
+Tnode* BST::insert(Tnode *cur, string akey, string aval){
+	if(akey < cur->key){
+		if(cur->left == NULL){
+		cur->left = new Tnode(akey, aval);
+		}//if found place
+		else{
+		cur->left = insert(cur->left, akey, aval);
+
+		}//else
+
+	}//if 
+	else if(akey > cur->key){
+		if(cur->right == NULL){
+			cur->right = new Tnode(akey, aval);
+			updateHeight(cur);
+		}
+		else{
+			cur->right = insert(cur->right, akey, aval);						
+		}
+	}//else if
+	else{
+		(cur->value).push_back(aval);
+
+
+	}
+	int bf = balanceFactor(cur);
+	if(bf > 1 || bf < -1){//left subtree is higher
+		cur = restoreBalance(cur, bf);
+	}//if bf = -2
+	updateHeight(cur);
+	return cur;
+
+}//insert()
