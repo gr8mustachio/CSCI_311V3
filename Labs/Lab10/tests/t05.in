@@ -1,0 +1,15 @@
+push 0 30
+push 1 20
+push 2 25
+push 3 40
+push 4 50
+push 5 22
+push 6 17
+push 7 35
+push 8 25
+push 9 25
+push 10 25
+push 11 25
+getSize
+getCapacity
+print
