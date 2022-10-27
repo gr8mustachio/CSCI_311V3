@@ -1,0 +1,13 @@
+Graph is:
+0: 3 4 
+1: 2 5 
+2: 5 
+3: 2 4 
+4: 1 2 5 
+5: 
+Running BFS on the source 0:
+0 3 4 2 1 5 
+Running BFS on the source 3:
+3 2 4 5 1 
+Running BFS on the source 4:
+4 1 2 5 

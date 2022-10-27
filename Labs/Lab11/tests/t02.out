@@ -1,0 +1,10 @@
+Graph is:
+0: 3 4 
+1: 2 5 
+2: 5 
+3: 2 4 
+4: 1 2 5 
+5: 
+2 is a neighbor of 4
+1 is not a neigbor of 0
+5 is a neighbor of 1
