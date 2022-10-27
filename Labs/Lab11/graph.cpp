@@ -16,6 +16,7 @@ Graph::Graph() {
         Adj[u].push_back(v); // add v to adjacency list of u
 
     }
+    size = N;
 
 }
 
