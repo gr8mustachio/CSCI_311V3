@@ -1,5 +1,8 @@
 #include<iostream>
+#include<climits>
 #include "graph.h"
+
+
 using namespace std;
 
 Graph::Graph() {
@@ -21,9 +24,9 @@ Graph::Graph() {
 }
 
 void Graph::printGraph() {
-    for(int u = 0; u < size; u++) {
-        // u is a node in a graph
-        cout << u << " ";
+    for(int u = 0; u < Adj.size(); u++) {
+        // u is a node in a graph --inst
+        cout << u << ": ";
         for(int j = 0; j < (int)Adj.at(u).size(); j++) {
             int v = Adj.at(u).at(j); // v is neighbor of u, j is index not neighbor
             cout << v << " ";
@@ -103,9 +106,17 @@ void Graph::printPath(int v) {
 }
 
 void Graph::printNeighbors(int u) {
-
+	//cout << u << ": "; 
+	for(int i = 0; i < Adj[u].size(); i++) {
+		cout << Adj[u][i] << " ";
+	}
+	cout << endl;
 }
 
 bool Graph::isNeighbor(int u, int v) {
+	for(int i = 0; i < Adj[u].size(); i++) {
+		if(Adj[u][i] == v)
+			return true;
+	}
     return false;
 }

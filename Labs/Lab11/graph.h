@@ -16,7 +16,7 @@ class Graph{
         void dfsVisit(int u, int &t); // t is timestamp
         void printPath(int v); // prints path from s to v 
     private:
-        vector<vector<int>> Adj; // Adjacency Lists
+        vector<vector<int> > Adj; // Adjacency Lists
         vector<int> distance;
         vector<int> parents;
         vector<char> colors; // use it for DFS

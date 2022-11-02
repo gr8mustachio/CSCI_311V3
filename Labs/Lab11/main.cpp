@@ -31,6 +31,7 @@ int main(){
 		}else if(command == "bfs"){
 			int s;
 			cin >> s;
+            //cout << endl;
 			cout << "Running BFS on the source " << s << ":" << endl;
 			agraph.bfs(s);
 		
@@ -44,6 +45,7 @@ int main(){
 			agraph.bfs(s);
 			cout << "Path from the source " << s << " to vertex " << v << " is:" << endl;
 			agraph.printPath(v);
+            cout << endl;
 		}
         else{
             cerr << "ERROR: command " << command << " is not recognized." << endl;

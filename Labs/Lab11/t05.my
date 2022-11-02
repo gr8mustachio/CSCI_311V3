@@ -1,0 +1,25 @@
+Graph is:
+0: 3 
+1: 
+2: 4 
+3: 7 
+4: 0 
+5: 2 
+6: 3 
+7: 5 8 
+8: 6 9 11 
+9: 2 
+10: 6 
+11: 10 
+Running BFS on the source 0:
+0 3 7 5 8 2 6 9 11 4 10 
+Path from the source 0 to vertex 2 is:
+0 3 7 5 2 
+Running BFS on the source 8:
+8 6 9 11 3 2 10 7 4 5 0 
+Path from the source 8 to vertex 3 is:
+8 6 3 
+Running BFS on the source 5:
+5 2 4 0 3 7 8 6 9 11 10 
+Path from the source 5 to vertex 6 is:
+5 2 4 0 3 7 8 6 
