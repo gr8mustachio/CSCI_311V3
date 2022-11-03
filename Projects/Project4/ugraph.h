@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<climits>
+#include<set>
 
 #include "timestamp.h"
 using namespace std;
@@ -32,6 +33,8 @@ class Ugraph {
 		void printBridges();
 		void printCC();
 		bool twoColoring();
+
+		
 		struct edge {
 			int neighbor; // adjacent node
 			int w; // keeps auxilliary information
@@ -44,7 +47,6 @@ class Ugraph {
 				w = j;
 			};
 		};
-	
 	private:
 		vector<vector<edge>> Adj;
 		vector<int> parents;
@@ -52,5 +54,8 @@ class Ugraph {
 		vector<char> colors;
 		vector<TimeStamp> stamps;
 		int size;
+		// helper functions
+		set<int> dfsDistinct(int u, int v);
+		void dfsVisit_Distinct(int u, int v, int &t, set<int> &edgeSet, bool found);
 };
 #endif
