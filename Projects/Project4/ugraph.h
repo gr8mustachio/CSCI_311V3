@@ -55,7 +55,9 @@ class Ugraph {
 		vector<TimeStamp> stamps;
 		int size;
 		// helper functions
-		set<int> dfsDistinct(int u, int v);
-		void dfsVisit_Distinct(int u, int v, int &t, set<int> &edgeSet, bool found);
+		// set<int> dfsDistinct(int u, int v);
+		// void dfsVisit_Distinct(int u, int v, int &t, set<int> &edgeSet, bool found);
+		void bfs_noPrint(int u);
+		void backtrack(int v);
 };
 #endif

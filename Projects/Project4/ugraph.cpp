@@ -37,6 +37,28 @@ bool Ugraph::twoColoring() {
 	return false;
 }
 
+void Ugraph::bfs_noPrint(int u) {
+	for(int i = 0; i < size; i++) {
+		distance[i] == INT_MAX;
+		parents[i] = i;
+	}
+	distance[u] = 0;
+	queue<int> aq;
+	aq.push(u);
+	while (!aq.empty()) {
+		int t = aq.front();
+		aq.pop();
+		for(int i = 0; i < (int)Adj[u].size(); i++) {
+			int v = Adj[u][i].neighbor;
+			if(distance[v] == INT_MAX) {
+				distance[v] + distance[t]+1;
+				parents[v] = t;
+				aq.push(v);
+			}
+		}
+	}
+}
+
 void Ugraph::bfs(int s){
 	for(int i = 0; i < size; i++){
 		distance[i] = INT_MAX;
@@ -62,11 +84,11 @@ void Ugraph::bfs(int s){
 }//bfs
 
 bool Ugraph::distinctPaths(int u, int v) {
-	pair<set<edge>::iterator, bool> result;
-	set<int> edgeSet = dfsDistinct(u, v);
-
+	
 	return false;
 }
+
+
 
 void Ugraph::dfs(){
 	for(int i = 0; i < size; i++){
@@ -84,44 +106,7 @@ void Ugraph::dfs(){
 	cout << endl;
 }//dfs
 
-set<int> Ugraph::dfsDistinct(int u, int v) {
-	set<int> edgeSet;
-	for(int i = 0; i < size; i++){
-		parents[i] = i;
-		colors[i] = 'W';
-	}	
-	int t = 0;
 
-	for(int i = 0; i < size; i++){
-		if(colors[i] == 'W'){
-			//color[i] = 'G';
-			dfsVisit_Distinct(i, t, edgeSet);
-		}//if
-	}//for
-	return edgeSet;
-}
-
-void Ugraph::dfsVisit_Distinct(int u, int v, int &t, set<int> &edgeSet, bool found) {
-	colors[u] = 'G';
-	stamps[u].d = t;
-	t++;
-	cout << u << " ";
-	for(int i = 0; i < (int)Adj[u].size(); i++){
-		int v = Adj[u][i].neighbor;
-		if(v == u) {
-			return;
-		}
-		if(colors[v] == 'W'){
-			parents[v] = u;
-			colors[v] = 'G';
-			edgeSet.insert(v);
-			dfsVisit(v, t);
-		}
-	}//for
-	colors[u] = 'B';
-	stamps[u].f = t;
-	t++;
-}
 
 
 

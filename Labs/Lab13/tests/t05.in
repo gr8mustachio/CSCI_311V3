@@ -1,0 +1,18 @@
+11
+addEdge 0 1
+addEdge 1 4
+addEdge 1 2
+addEdge 2 4
+addEdge 2 3
+addEdge 3 4
+addEdge 3 8
+addEdge 4 5
+addEdge 4 6
+addEdge 5 0
+addEdge 6 7
+addEdge 7 4
+addEdge 8 9
+addEdge 9 10
+addEdge 10 5
+printGraph
+longestCycle 4
