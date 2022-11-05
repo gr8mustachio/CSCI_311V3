@@ -31,6 +31,7 @@ public:
 
 	//Problem 1
 	bool sameCycle(int s, int r);
+	bool isSameCycleVisit(int u, int &t, int s, int r);
 	
     //Problem 2.
 	int longestCycle(int s);
@@ -47,6 +48,12 @@ public:
 	// collect nodes on shortest path dfrom s to v after bfs on s
 	void collectPath(int v, vector<int> &apath);
 
+	// Lecture
+	int evenCycle();
+	int evenCycleVisit(int u, int &t);
+
+	void printCycle(int start, int cur);
+
 private:
 	vector< vector<edge> > Adj; //adjacency lists of the graph 
 	vector<int> distance; //for BFS and DFS
@@ -54,6 +61,9 @@ private:
 	vector<char> colors; //for DFS
 	vector<TimeStamp> stamps; //for DFS: stamps[v].d returns discovery time of v, and stamps[v].f finishing time.
     int size;
+	//bool sameCycleVisit(int u, int )
+	void backtrack(int r);
+	bool backtrack_SC(int r, int key);
 };
 
 #endif
