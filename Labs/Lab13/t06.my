@@ -1,0 +1,15 @@
+2 3 
+3 4 
+5 
+8 
+10 
+6 8 
+7 8 
+2 
+
+4 3 
+9 
+There are no two distinct paths from 0 to 8.
+There are no two distinct paths from 1 to 8.
+There are no two distinct paths from 4 to 3.
+There are no two distinct paths from 2 to 6.

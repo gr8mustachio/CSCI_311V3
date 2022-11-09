@@ -40,6 +40,67 @@ void Graph::printGraph(){
 	}
 }//printGraph
 
+bool Graph::twoPaths(int s, int r) {
+	bool foundPath = false;
+	int numOfPaths = 0;
+	for(int i = 0; i < size; i++){
+    	distance[i] = INT_MAX;
+    	parents[i] = i;
+  	}//for
+ 	distance[s] = 0;
+  	queue<int> aq;
+  	aq.push(s);
+  	while(!aq.empty()){
+    	int u = aq.front();
+    //cout << u << " " ; 
+    	aq.pop();
+
+    	for(int i = 0; i < (int)Adj[u].size(); i++){
+      		int v = Adj[u][i].neighbor;
+      		if(distance[v] == INT_MAX){
+				distance[v] = distance[u] + 1;
+				parents[v] = u;
+				aq.push(v);
+				if(v == r)
+					break;
+      		}
+    	}//for
+  	}//while
+	if(distance[r] == INT_MAX) // if r is unreachable
+		return false;
+	else {
+		backtrack(r);
+		foundPath = true;
+	}
+	// second BFS run
+	for(int i = 0; i < size; i++) {
+		distance[i] = INT_MAX;
+		parents[i] = i;
+	}
+	distance[s] = 0;
+	// clear queue of past bfs
+	for(int i = 0; i < aq.size(); i++)
+		aq.pop();
+	aq.push(s);
+	while(!aq.empty()) {
+		int u = aq.front();
+		aq.pop();
+		for(int i = 0; i < Adj[u].size(); i++) {
+			int v = Adj[u][i].neighbor;
+			if(distance[v] == INT_MAX && Adj[u][i].w != -1) {
+				distance[v] = distance[u] + 1;
+				parents[v] = u;
+				aq.push(v);
+			}
+		}
+	}
+	if(distance[r] != INT_MAX && foundPath)
+		return true;
+	else
+		return false;
+	//return false;
+}
+
 void Graph::bfs(int s){
 	for(int i = 0; i < size; i++){
 		distance[i] = INT_MAX;
@@ -51,7 +112,6 @@ void Graph::bfs(int s){
 	while(!aq.empty()){
 		int u = aq.front();
         aq.pop();
-
 		for(int i = 0; i < (int)Adj[u].size(); i++){
 			int v = Adj[u][i].neighbor;
 			if(distance[v] == INT_MAX){
@@ -163,8 +223,7 @@ bool Graph::isSameCycleVisit(int u, int &t, int s, int r){
 				// else keep looking for a cycle via next neighbor
 			}
 			else if(colors[v] == 'G' && v == s) {
-				backtrack(v);
-				return true; // a cycle has been found with s
+				return backtrack_SC(v, r);  // a cycle has been found with s
 			}
 			else if(colors[v] == 'B') {
 
@@ -182,7 +241,7 @@ void Graph::backtrack(int r) {
 	else {
 		int p = parents[r];
 		for(int i = 0; i < Adj[p].size(); i++) {
-			int n = Adj[r][i].neighbor;
+			int n = Adj[p][i].neighbor;
 			if(n == r) {
 				Adj[p][i].w = -1;
 				backtrack(p);
@@ -200,11 +259,16 @@ bool Graph::backtrack_SC(int r, int key) {
 		int p = parents[r];
 		for(int i = 0; i < Adj[p].size(); i++) {
 			int n = Adj[r][i].neighbor;
-			if(n == r) {
+			if(n == r && n != key) {
 				Adj[p][i].w = -1;
 				return backtrack_SC(p, key);
 			}
+			else if(n == r && n == key) {
+				Adj[p][i].w = -1;
+				return true;
+			}
 		}
+		return false;
 	}
 }
 
@@ -222,9 +286,9 @@ bool Graph::sameCycle(int s, int r) {
 			//color[i] = 'G';
 			bool res = isSameCycleVisit(i, t, s, r);
 			if(res) {
-				cout << "s is: " << s << " and r is:" << r << endl;
-				cout << "vertex " << i << " has color " << colors[i] << endl;
-				backtrack(i);
+				// cout << "s is: " << s << " and r is:" << r << endl;
+				// cout << "vertex " << i << " has color " << colors[i] << endl;
+				return true;
 
 			} // if there is a cycle
 		}//if
@@ -236,6 +300,51 @@ bool Graph::sameCycle(int s, int r) {
 	// }
 	return false;	
 }
+
+int Graph::longestCycle(int s) {
+	int curMaxLen = -1;
+	int dist = 0;
+	for(int i = 0; i < size; i++) {
+		parents[i] = i;
+		colors[i] = 'W';
+		distance[i] = 0;
+	}
+	int t = 0;
+	longestCycleVisit(s, t, dist, curMaxLen);
+	if(curMaxLen == -1)
+		return 0;
+	return curMaxLen;
+}
+
+void Graph::longestCycleVisit(int u, int &t, int &dist, int &curMax) {
+	//int cur;
+	colors[u] = 'G';
+	stamps[u].d = t;
+	distance[u] = dist;
+	t++;
+
+	for(int i = 0; i < Adj[u].size(); i++) {
+		int v = Adj[u][i].neighbor;
+		if(colors[v] == 'G') {
+			int len = distance[u]+1;
+			if(parents[v] == v) {
+				if(len > curMax)
+					curMax = len;
+			}
+		}
+		else if(colors[v] == 'W')
+		{
+			distance[v] = distance[u]+1;
+			dist = distance[u]+1;
+			parents[v] = u;
+			colors[v] = 'G';
+			longestCycleVisit(v, t, dist, curMax);
+		}
+	}
+	colors[u] = 'B';
+	stamps[u].f = t;
+	t++;
+} // longestCycleVisit
 
 void Graph::collectPath(int v, vector<int> &apath) {
 	if(distance[v] == INT_MAX)

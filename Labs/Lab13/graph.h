@@ -35,6 +35,7 @@ public:
 	
     //Problem 2.
 	int longestCycle(int s);
+	void longestCycleVisit(int u, int &t, int &dist, int &curMax);
 	
     //Problem 3
 	bool twoPaths(int s, int r);

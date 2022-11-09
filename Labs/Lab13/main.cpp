@@ -33,22 +33,24 @@ int main(){
 			else
 				cout << s << " and " << r << " are not on the same cycle." << endl;
 		} 
-		// else if(command == "longestCycle"){
-		// 	int s;
-		// 	cin >> s;
-		// 	cin.ignore();
-		// 	int L = ag.longestCycle(s);
-		// 	cout << "The length of the longest cycle, on which " << s << " lies is " << L << endl;
-		// }else if(command == "twoPaths"){
-		// 	int s, r;
-		// 	cin >> s >> r;
-		// 	cin.ignore();
-		// 	bool res = ag.twoPaths(s, r);
-		// 	if(res)
-		// 		cout << "There are two distinct paths from " << s << " to " << r << "." << endl;
-		// 	else
-		// 		cout << "There are no two distinct paths from " << s << " to " << r << "." << endl;
-		// }else if(command == "isOnPath"){
+		else if(command == "longestCycle"){
+			int s;
+			cin >> s;
+			cin.ignore();
+			int L = ag.longestCycle(s);
+			cout << "The length of the longest cycle, on which " << s << " lies is " << L << endl;
+		}
+		else if(command == "twoPaths"){
+			int s, r;
+			cin >> s >> r;
+			cin.ignore();
+			bool res = ag.twoPaths(s, r);
+			if(res)
+				cout << "There are two distinct paths from " << s << " to " << r << "." << endl;
+			else
+				cout << "There are no two distinct paths from " << s << " to " << r << "." << endl;
+		}
+		// else if(command == "isOnPath"){
 		// 	int s, r, q;
 		// 	cin >> s >> r >> q;
 		// 	cin.ignore();
