@@ -8,7 +8,62 @@
 #include<utility>
 using namespace std;
 
-#include "graph.h"
+#include "prac2.h"
+
+
+void Graph::printMySources(int v) {
+	for(int i = 0; i < size; i++) {
+		for(int j = 0; j < Adj[i].size(); j++) {
+			if(Adj[i][j].neighbor == v)
+				cout << i << " "; 
+		}
+	}
+	cout << endl;
+}
+
+void Graph::printRoots() {
+	dfs();
+	for(int i = 0; i < parents.size(); i++) {
+		if(parents[i] == i)
+			cout << parents[i] << " ";
+	}
+	cout << endl;
+}
+
+void Graph::printOutDegree() {
+	dfs();
+	for(int i = 0; i < Adj.size(); i++) {
+		cout << Adj[i].size() << " ";
+	}
+	cout << endl;
+}
+
+void Graph::printInDegree() {
+	vector<int> transpose = buildTranspose();
+	for(int i = 0; i < Adj.size(); i++) {
+		cout << transpose[i].size() << " ";
+	}
+	cout << endl;
+}
+
+void Graph::printBlack() {
+	dfs();
+	for(int i = 0; i < colors.size(); i++) {
+		if(colors[i] == 'B') {
+			cout << i << " ";
+		}
+	}
+	cout << endl;
+}
+
+void Graph::printDist(int s, int k) {
+	bfs(s);
+	for(int i = 0; i < size; i++) {
+		if(distance[i] == k)
+			cout << i << " ";
+	}
+	cout << endl;
+}
 
 Graph::Graph(int N){
 
@@ -435,3 +490,7 @@ void Graph::printCycle(int start, int cur) {
 	printCycle(start, parents[cur]);
 	cout << cur << " ";
 }
+
+
+// 	TEST PRACTICE
+

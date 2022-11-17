@@ -50,16 +50,16 @@ int main(){
 			else
 				cout << "There are no two distinct paths from " << s << " to " << r << "." << endl;
 		}
-		// else if(command == "isOnPath"){
-		// 	int s, r, q;
-		// 	cin >> s >> r >> q;
-		// 	cin.ignore();
-		// 	bool res = ag.isOnPath(s, r, q);
-		// 	if(res)
-		// 		cout << q << " is on the shortest path from " << s << " to " << r << "." << endl;
-		// 	else
-		// 		cout << q << " is not on the shortest path from " << s << " to " << r << "." << endl;
-		// }
+		else if(command == "isOnPath"){
+			int s, r, q;
+			cin >> s >> r >> q;
+			cin.ignore();
+			bool res = ag.isOnPath(s, r, q);
+			if(res)
+				cout << q << " is on the shortest path from " << s << " to " << r << "." << endl;
+			else
+				cout << q << " is not on the shortest path from " << s << " to " << r << "." << endl;
+		}
 		else if(command == "isCycle") {
 			bool res = ag.isCycle();
 			if(res)
