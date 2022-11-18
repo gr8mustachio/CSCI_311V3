@@ -62,10 +62,10 @@ class Ugraph {
 		// void dfsVisit_Distinct(int u, int v, int &t, set<int> &edgeSet, bool found);
 		void bfs_noPrint(int u);
 		void backtrack(int r);
-		void visited(int i, vector<int> &sorted); 
+		void visit(int i, vector<int> &sorted); 
 		void bfsDistinctPaths(int s);
 		void printPath(int v);
 		void printPathRec(int v);
-		void findBridges(int u, vector<int> parents, vector<int> discovery, vector<bool> visited, vector<int> low);
+		void findBridges(int u, vector<int> &parents, vector<int> &discovery, vector<bool> &visited, vector<int> &low);
 };
 #endif

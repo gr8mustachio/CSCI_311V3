@@ -49,6 +49,7 @@ void Ugraph::removeEdge(int u, int v) {
 
 bool Ugraph::distinctPaths(int u, int v) {
 	bfs_noPrint(u);
+	cout << "hello\n";
 	int count = 0;
 	vector<int> apath;
 	// while(distance[r] != INT_MAX) {
@@ -66,6 +67,7 @@ bool Ugraph::distinctPaths(int u, int v) {
 	if(distance[v] == INT_MAX)
 		return false;
 	count++;
+	cout << "VALUE OF COUNTER: " << count << endl;
 	if(count == 2) {
 		bfs_noPrint(u);
 		printPath(v);
@@ -73,7 +75,6 @@ bool Ugraph::distinctPaths(int u, int v) {
 		printPath(v);
 		return true;
 	}
-	
 	
 }
 
@@ -89,12 +90,39 @@ void Ugraph::collectPath(int v, vector<int> &apath) {
 }
 
 
-void Ugraph::findBridges(int u, vector<int> parents, vector<int> discovery, vector<bool> visited, vector<int> low) {
-	int t = 0;
-
+void Ugraph::findBridges(int u, vector<int> &parents, vector<int> &discovery, vector<bool> &visited, vector<int> &soonest) {
+	if(visited[u]) // if u has already been visited
+		return;
+	// else mark as visited and look for possible bridge
+	visited[u] = true;
+	static int t = 0;
+	soonest[u] = discovery[u] = ++t;
+	for(int i = 0; i < Adj[u].size(); i++) {
+		int v = Adj[u][i].neighbor;
+		if(!visited[v]) {
+			parents[v] = u;
+			findBridges(v, parents, discovery, visited, soonest);
+			soonest[u] = min(soonest[u], soonest[v]);
+			if(soonest[v] > discovery[u]) {
+				cout << u << " " << v << endl;
+			}
+		}
+		else if(v != parents[u]) {
+			soonest[u] = min(soonest[u], discovery[v]);
+		}
+	}
 }
 
-void Ugraph::printBridges() { 
+void Ugraph::printBridges() {
+	vector<bool> visited(size, false); 
+	for(int i = 0; i < size; i++) {
+		parents[i] = i;
+	}
+	vector<int> discovery(size, -1);
+	vector<int> soonest(size, -1);
+	for(int i = 0; i < size; i++) {
+		findBridges(i, parents, discovery, visited, soonest);
+	}
 	return;
 }
 
@@ -106,7 +134,7 @@ void Ugraph::printCC() {
 	}
 	for(int j = 0; j < size; j++) {
 		if(colors[j] == 'W') {
-			visited(j, sorted);
+			visit(j, sorted);
 			sort(sorted.begin(), sorted.end());
 			for(int i = 0; i < sorted.size(); i++)
 				cout << sorted[i] << " ";
@@ -116,13 +144,15 @@ void Ugraph::printCC() {
 	}
 }
 
-void Ugraph::visited(int i, vector<int> &sorted) {
+void Ugraph::visit(int i, vector<int> &sorted) {
+	if(colors[i] == 'G') // if i has already been visited then return 
+		return;
 	colors[i] = 'G';
 	sorted.push_back(i);
 	for(int j = 0; j < Adj[i].size(); j++) {
 		int v = Adj[i][j].neighbor;
 		if(colors[v] == 'W')
-			visited(v, sorted);
+			visit(v, sorted);
 	}
 }
 
@@ -288,22 +318,18 @@ void Ugraph::printGraph() {
     }
 }
 
-void Ugraph::printPath(int v)
-{
-  if(distance[v] != INT_MAX)
-  {
-    printPathRec(v);
-    cout << endl;
-  }
+void Ugraph::printPath(int v) {
+  	if(distance[v] != INT_MAX) {
+    	printPathRec(v);
+    	cout << endl;
+  	}
 }
 
-void Ugraph::printPathRec(int v)
-{
-  if(distance[v] == 0)
-  {
-    cout << v << " ";
-    return;
-  }
-  printPathRec(parents[v]);
-  cout << v << " ";
+void Ugraph::printPathRec(int v) {
+  	if(distance[v] == 0) {
+    	cout << v << " ";
+    	return;
+  	}
+  	printPathRec(parents[v]);
+  	cout << v << " ";
 }
